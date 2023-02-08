@@ -1,0 +1,17 @@
+==== Basics of the NAND Flash ====
+
+ Signals: /WP /BUSY /RE /WE /CE ALE CLE D0~D7
+
+Phison:
+
+------------------------------------
+Phison PS2251-68 NAND registers
+
+F208 ==> Flash CS0~7
+F209 ==> Flash CS8~15?
+
+F211 ==> Address write
+
+F213 ==> Command write
+
+F215 ==> Data read/write?

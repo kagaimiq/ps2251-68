@@ -1,0 +1,269 @@
+*****************2268 PRAM*****************
+=> 06 b1 03 00 00 00 00 00 01 00 00 00 00 00 00 00
+-> (512) isp fw header
+
+=> 06 b0 00 00 08 00 00 00 00 00 00 00 00 00 00 00
+<- 55 02 02 00 00 00 00 00
+
+=> 06 b1 02 00 00 00 00 00 40 00 00 00 00 00 00 00
+-> (32768) isp fw data
+
+=> 06 b0 00 00 08 00 00 00 00 00 00 00 00 00 00 00
+<- a5 02 02 00 00 00 00 00
+
+=> 06 21 10 00 00 00 00 00 10 00 00 00 00 00 00 00
+<- (8192) isp fw readback +0x0000
+
+=> 06 21 10 00 10 00 00 00 10 00 00 00 00 00 00 00
+<- (8192) isp fw readback +0x2000
+
+=> 06 21 10 00 20 00 00 00 10 00 00 00 00 00 00 00 
+<- (8192) isp fw readback +0x4000
+
+=> 06 21 10 00 30 00 00 00 10 00 00 00 00 00 00 00
+<- (8192) isp fw readback +0x6000
+
+=> 06 b3 04 ff 00 00 00 00 00 00 00 00 00 00 00 00
+
+******************2268 SORTER*****************
+=> 06 e6 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+<- 4f 53 36 38 20 56 65 72 20 31 2e 30 38 6b 20 38 32 30 31 35 2e 30 36 2e 31 32 2d 31 29 00 a0 a1
+
+=> 06 56 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+<- (512) nand id bytes
+
+=> 06 e6 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+<- (512) some info data
+
+=> 06 05 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+<- (512) some data
+
+=> 06 e6 04 00 00 00 00 00 00 00 00 00 00 00 00 00
+<- ff 06 ff ff
+
+=> 06 e6 a1 02 01 00 00 00 00 00 00 00 00 00 00 00
+<- (2048) some data
+
+=> 06 e6 a1 00 00 00 00 00 00 00 00 00 00 00 00 00
+-> (1024) some data <<D1>>
+	0000   08 08 30 3e 54 9d 35 3e 4a 93 3a 43 58 94 3f 43
+	0010   4e 8b 38 48 52 93 3d 47 52 89 36 3d 4e 91 3b 3e
+	0020   46 87 32 3b 4c 8d 37 3c 44 84 2b 39 4a 8b 30 3b
+	0030   42 83 21 37 48 88 26 3a 40 7e 17 21 36 7c 1c 21
+	0040   2c 72 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0050   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0060   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0070   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0080   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0090   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00c0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00d0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00e0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0100   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0110   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0120   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0130   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0140   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0150   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0160   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0170   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0180   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0190   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01c0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01d0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01e0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0200   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0210   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0220   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0230   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0240   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0250   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0260   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0270   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0280   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0290   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	02a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	02b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	02c0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	02d0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	02e0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	02f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0300   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0310   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0320   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0330   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0340   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0350   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0360   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0370   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0380   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0390   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	03a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	03b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	03c0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	03d0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	03e0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	03f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+=> 06 e6 08 01 00 00 00 00 00 00 00 00 00 00 00 00
+
+=> 06 e6 41 00 00 00 20 00 00 00 00 00 00 00 00 00
+<- 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+.....
+
+=> 06 e6 03 01 00 00 00 00 00 00 00 00 00 00 01 00
+<- (1024) <<D2>>
+	0000   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0010   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0020   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0030   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0040   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0050   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0060   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0070   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0080   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0090   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00a0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00b0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00c0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00d0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00e0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00f0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0100   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0110   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0120   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0130   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0140   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0150   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0160   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0170   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0180   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0190   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01a0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01b0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01c0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01d0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01e0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01f0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0200   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0210   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0220   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0230   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0240   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0250   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0260   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0270   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0280   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0290   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	02a0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	02b0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	02c0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	02d0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	02e0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	02f0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0300   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0310   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0320   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0330   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0340   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0350   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0360   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0370   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0380   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0390   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	03a0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	03b0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	03c0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	03d0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	03e0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	03f0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+
+=> 06 23 00 50 68 49 f2 79 00 00 00 00 00 00 00 00
+
+=> 06 05 52 41 f2 00 00 00 00 00 00 00 00 00 00 00
+<- (528) <<D3>>
+	0000   18 18 00 00 08 02 e1 81 fe ff 20 10 00 d0 e0 01
+	0010   00 03 00 d0 00 ff 00 00 c0 00 00 03 00 00 00 00
+	0020   05 e0 00 00 04 00 00 da 88 00 83 b3 00 00 03 00
+	0030   00 00 00 07 00 ff 00 00 03 3f 00 00 00 00 00 00
+	0040   00 00 00 00 00 80 81 82 00 44 05 00 00 00 00 00
+	0050   00 00 03 10 00 00 00 00 00 17 00 14 00 00 00 00
+	0060   40 00 10 00 40 00 50 00 00 00 00 00 00 00 00 00
+	0070   00 00 00 88 11 00 00 88 11 00 00 00 ff 00 07 fe
+	0080   00 00 00 00 00 43 00 00 01 00 00 00 00 00 00 3f
+	0090   00 00 00 00 00 18 18 18 00 00 00 00 00 00 00 00
+	00a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00c0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00d0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00e0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	00f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0100   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0110   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0120   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0130   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0140   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0150   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0160   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0170   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0180   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	0190   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	01c0   ba 00 00 00 2d 00 00 00 d2 00 00 00 a4 00 00 00
+	01d0   c8 00 00 00 13 00 00 00 30 00 00 00 3b 00 00 00
+	01e0   bf 00 00 00 4a 00 00 00 87 00 00 00 ee 00 00 00
+	01f0   cb 00 00 00 67 00 00 00 01 00 00 00 3b 00 00 00
+	0200   49 46 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+
+=> 06 05 52 41 e0 00 00 00 00 00 00 00 00 00 00 00
+<- (528) 
+	0000   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0010   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0020   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0030   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0040   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0050   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0060   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0070   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0080   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0090   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00a0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00b0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00c0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00d0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00e0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	00f0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0100   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0110   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0120   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0130   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0140   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0150   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0160   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0170   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0180   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0190   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01a0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01b0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01c0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01d0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01e0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	01f0   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+	0200   49 46 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+=> 06 e6 02 01 2c 00 00 00 00 00 00 00 00 00 00 00
+
+=> 06 e6 08 01 00 00 00 00 00 00 00 00 00 00 00 00
+
+=> 06 f6 59 01 00 00 00 00 00 00 00 00 00 00 00 00
+
+*****************2268 PRAM*****************

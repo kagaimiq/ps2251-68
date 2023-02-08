@@ -1,0 +1,44 @@
+=========== PRAM mode commands ============
+
+---------------- Get NAND IDs ------------------
+=06 04 -- -- -- --
+=06 56 -- -- -- --
+>>> 512 bytes block
+
+Block format:
+   8 NANDs,
+   16 bytes per NAND - command 90h
+
+------------------ Read PRAM -------------------
+=06 0B XX aa:AA 00 00 ss:SS
+=06 21 XX aa:AA 00 00 ss:SS
+>>> Read data
+
+XX = ?? set to 0x10, but unused?
+aa:AA = Address, in 2 bytes unit
+ss:SS = Size, in 2 bytes unit
+
+---------------- Send PRAM code ----------------
+=06 11 02 00 00 00 00 ss:SS 
+=06 B1 02 00 00 00 00 ss:SS
+<<< Code data
+
+ss:SS = Size, in 2 bytes unit
+
+------- Send PRAM boot header (BtPramCd) -------
+=06 11 03 00 00 00 00 ss:SS
+=06 B1 03 00 00 00 00 ss:SS
+<<< Header data
+
+ss:SS = Size, in 2 bytes unit
+
+--------------- Run the PRAM code --------------
+=06 13 XX YY -- --
+=06 B3 XX YY -- --
+
+XX = ...
+     b0 = ACK, changes clocks... doesn't enter?
+     b1 = ACK, wait... doesn't enter?
+     b2 = ?? set to 1, but unused
+
+YY = ?? set to 0xff, but unused

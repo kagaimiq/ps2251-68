@@ -1,0 +1,26 @@
+<= 06 05 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+-> 528 bytes of some info
+
+<= 06 56 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+-> 512 bytes with nand flash id
+
+=====================[ SORTER protocol ]====================
+
+@@ Erase blocks?
+  <= 06 e6 41 BB bb bb NN 00 00 00 00 00 00 00 00 00
+  -> SS...
+
+  BBbbbb = block number
+  NN = block count
+  SS = block erase status? (one byte per block)
+
+@@ Read block?
+  <= 06 e6 80 00 BB bb bb bb NN nn 00 00 00 00 00 00 
+  -> data
+
+  BBbbbb = block number
+  NNnn = number of bytes to read (/2)
+  data = return data...
+
+
+
