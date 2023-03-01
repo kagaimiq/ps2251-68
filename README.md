@@ -9,6 +9,7 @@
 - USB 2.0 High speed device
   - (probably) 4 endpoints (ep0: control, ep1: bulk in, ep2: bulk out, ?? ep3: interrupt ??)
   - automatic handling of the SET_ADDRESS control request...
+  - ... also ignores the SET_CONFIGURATION control request...
 - NAND flash interface
   - 8-bit bus width
   - 2 chip selects
