@@ -1,5 +1,7 @@
 # Phison PS2251-68
 
+![PS2251-68 on a Breadboard](ps2251-68_breadboard.jpg)
+
 ## General specs
 
 - Intel 8051 MCU
