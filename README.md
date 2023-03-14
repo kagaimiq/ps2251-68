@@ -50,4 +50,4 @@
 ## See also
 
 - [Psychson](https://github.com/brandonlw/Psychson) - a custom firmware for PS2251-03 (very different from PS2251-68!)
-
+- [Some "Phisonresearch" forum](https://phisonresearch.freeforums.net/) - seems to be dead, but anyway
