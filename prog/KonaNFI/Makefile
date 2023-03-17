@@ -1,7 +1,7 @@
-TARGET = phison2268
+TARGET = KonaNFI
 
 OBJS = \
-	testP.rel
+	konanfi.rel
 
 CFLAGS  = --model-small
 ASFLAGS = 
@@ -34,5 +34,4 @@ clean:
 	rm -f $(TARGET).bin
 
 run: $(TARGET).bin
-	cat ../BtPramCd $(TARGET).bin > test.bin
-	python3 ../runner.py --device /dev/sg3 test.bin
+	python3 ../runner.py -pv --device $(PRAM_DEVICE) $(TARGET).bin
