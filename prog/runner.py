@@ -1,5 +1,4 @@
 from scsiio import SCSIDev
-from hexdump import hexdump
 import argparse
 
 ap = argparse.ArgumentParser(description='Phison executive')
