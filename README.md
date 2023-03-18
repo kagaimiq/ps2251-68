@@ -29,6 +29,8 @@
 
 - Package: SSOP28
 
+![pinout](pinout.svg)
+
 ```
           ________
    Vdd --|o       |-- Vbus
