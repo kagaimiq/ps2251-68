@@ -5,7 +5,8 @@ OBJS = \
 
 CFLAGS  = --model-small
 ASFLAGS = 
-LDFLAGS = --model-small --code-loc 0x4080 --code-size 0x5f80 --xram-loc 0x0000 --xram-size 0x2000
+LDFLAGS = --model-small --code-loc 0x4080 --code-size 0x5f80
+# --xram-loc 0x0000 --xram-size 0x2000
 
 all: $(TARGET).ihx
 

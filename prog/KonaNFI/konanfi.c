@@ -10,32 +10,32 @@ uint8_t __xdata __at(0x2600)	usb_ep0_buff[64];
 uint8_t __xdata __at(0x2800)	usb_ep1_buff[512];
 uint8_t __xdata __at(0x2800)	usb_ep2_buff[512];
 
-uint8_t __xdata __at(0xf000)	usb_ep0_ctl;
-uint8_t __xdata __at(0xf001)	usb_irq0;
-uint8_t __xdata __at(0xf011)	usb_ep0_rxlen;
-uint8_t __xdata __at(0xf012)	usb_ep0_txlen;
+uint8_t __xdata __at(0xF000)	usb_ep0_ctl;
+uint8_t __xdata __at(0xF001)	usb_irq0;
+uint8_t __xdata __at(0xF011)	usb_ep0_rxlen;
+uint8_t __xdata __at(0xF012)	usb_ep0_txlen;
 
-uint8_t __xdata __at(0xf020)	usb_020; /* ? */
-uint8_t __xdata __at(0xf021)	usb_021; /* ep1/ep2 events */
-uint8_t __xdata __at(0xf023)	usb_023; /* ep1/ep2 pptr */
+uint8_t __xdata __at(0xF020)	usb_20; /* ? */
+uint8_t __xdata __at(0xF021)	usb_21; /* ep1/ep2 events */
+uint8_t __xdata __at(0xF023)	usb_23; /* ep1/ep2 pptr */
 
-uint8_t __xdata __at(0xf025)	usb_025; /* ep1 plen */
-uint8_t __xdata __at(0xf026)	usb_026; /* ep1 stat */
-uint8_t __xdata __at(0xf027)	usb_027; /* ep1 ctl */
-uint8_t __xdata __at(0xf028)	usb_028; /* ep1 len */
+uint8_t __xdata __at(0xF025)	usb_25; /* ep1 plen */
+uint8_t __xdata __at(0xF026)	usb_26; /* ep1 stat */
+uint8_t __xdata __at(0xF027)	usb_27; /* ep1 ctl */
+uint8_t __xdata __at(0xF028)	usb_28; /* ep1 len */
 
-uint8_t __xdata __at(0xf029)	usb_029; /* ep2 ctl + stat + lenh */
-uint8_t __xdata __at(0xf02a)	usb_02a; /* ep2 len */
-uint8_t __xdata __at(0xf02b)	usb_02b; /* ep2 plen */
-uint8_t __xdata __at(0xf02c)	usb_02c; /* ep2 stat2 */
-uint8_t __xdata __at(0xf02d)	usb_02d; /* ep2 ctl2 */
+uint8_t __xdata __at(0xF029)	usb_29; /* ep2 ctl + stat + lenh */
+uint8_t __xdata __at(0xF02A)	usb_2a; /* ep2 len */
+uint8_t __xdata __at(0xF02B)	usb_2b; /* ep2 plen */
+uint8_t __xdata __at(0xF02C)	usb_2c; /* ep2 stat2 */
+uint8_t __xdata __at(0xF02D)	usb_2d; /* ep2 ctl2 */
 
-uint8_t __xdata __at(0xf207)	nand_busy_val;
-uint8_t __xdata __at(0xf208)	nand_cs_val;
-uint8_t __xdata __at(0xf209)	nand_cs_dir;
-uint8_t __xdata __at(0xf211)	nand_pio_addr;
-uint8_t __xdata __at(0xf213)	nand_pio_cmd;
-uint8_t __xdata __at(0xf215)	nand_pio_data;
+uint8_t __xdata __at(0xF207)	nand_busy_val;
+uint8_t __xdata __at(0xF208)	nand_cs_val;
+uint8_t __xdata __at(0xF209)	nand_cs_dir;
+uint8_t __xdata __at(0xF211)	nand_pio_addr;
+uint8_t __xdata __at(0xF213)	nand_pio_cmd;
+uint8_t __xdata __at(0xF215)	nand_pio_data;
 
 #define KNFI_CMD_SEL		0x00
 #define KNFI_CMD_GET_BUSY	0x01
@@ -56,9 +56,9 @@ const uint8_t usb_device_desc[] = {
 	18,			/* bLength */
 	0x01,			/* bDescriptorType */
 	0x00,0x02,		/* bcdUSB */
-	0,				/* bDeviceClass */
-	0,				/* bDeviceSubClass */
-	0,				/* bDeviceProtocol */
+	0,			/* bDeviceClass */
+	0,			/* bDeviceSubClass */
+	0,			/* bDeviceProtocol */
 	0x40,			/* bMaxPacketSize */
 	0xca,0x67,		/* idVendor */		/*0x67ca = hiiragi, 0x6c34 = mizu*/
 	0x51,0x22,		/* idProduct */
@@ -166,6 +166,53 @@ void usb_ep0_send(void *ptr, int len) {
 	} while (len > 0);
 }
 
+char usb_get_desc(struct usb_setup_pkt *setup) {
+	const uint8_t *desc = 0;
+
+	switch (setup->wValue >> 8) {
+	/* device descriptor */
+	case 0x01:
+		desc = usb_device_desc;
+		break;
+
+	/* config descriptor */
+	case 0x02:
+		desc = usb_config_desc;
+		break;
+
+	/* string descriptor */
+	case 0x03:
+		switch (setup->wValue & 0xff) {
+		case 0: /* index 0: Language IDs */
+			desc = usb_string_desc_0;
+			break;
+
+		case 1: /* index 1 */
+			desc = usb_string_desc_1;
+			break;
+
+		case 2: /* index 2 */
+			desc = usb_string_desc_2;
+			break;
+
+		case 3: /* index 3 */
+			desc = usb_string_desc_3;
+			break;
+		}
+		break;
+	}
+
+	if (desc) {
+		uint16_t len = desc[0];
+		if (desc[1] == 0x02) len = desc[2] | (desc[3] << 8);
+		if (setup->wLength < len) len = setup->wLength;
+		usb_ep0_send(desc, len);
+		return 1;
+	}
+
+	return 0;
+}
+
 void usb_h_setup(struct usb_setup_pkt *setup) {
 	switch (setup->bmRequestType & 0x7f) {
 	/* standard, device */
@@ -175,38 +222,9 @@ void usb_h_setup(struct usb_setup_pkt *setup) {
 		case 0x06:
 			if (!(setup->bmRequestType & 0x80)) break;
 
-			switch (setup->wValue >> 8) {
-			/* device descriptor */
-			case 0x01:
-				usb_ep0_send(usb_device_desc, setup->wLength);
+			if (usb_get_desc(setup))
 				return;
 
-			/* config descriptor */
-			case 0x02:
-				usb_ep0_send(usb_config_desc, setup->wLength);
-				return;
-
-			/* string descriptor */
-			case 0x03:
-				switch (setup->wValue & 0xff) {
-					case 0: /* index 0: Language IDs */
-						usb_ep0_send(usb_string_desc_0, setup->wLength);
-						return;
-
-					case 1: /* index 1 */
-						usb_ep0_send(usb_string_desc_1, setup->wLength);
-						return;
-
-					case 2: /* index 2 */
-						usb_ep0_send(usb_string_desc_2, setup->wLength);
-						return;
-
-					case 3: /* index 3 */
-						usb_ep0_send(usb_string_desc_3, setup->wLength);
-						return;
-				}
-				break;
-			}
 			break;
 		}
 		break;
