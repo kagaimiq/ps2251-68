@@ -14,7 +14,6 @@
   - 8-bit bus width
   - 2 chip selects
   - DQS signal
-  - V<sub>DDQ</sub> output
   - some randomizer/ecc stuff
   - DMA (of course)
 
