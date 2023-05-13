@@ -69,13 +69,25 @@ const uint8_t usb_device_desc[] = {
 	1			/* bNumConfigurations */
 };
 
+const uint8_t usb_devqualifier_desc[] = {
+	10,			/* bLength */
+	0x06,			/* bDescriptorType */
+	0x00,0x02,		/* bcdUSB */
+	0,			/* bDeviceClass */
+	0,			/* bDeviceSubClass */
+	0,			/* bDeviceProtocol */
+	0x40,			/* bMaxPacketSize0 */
+	1,			/* bNumConfigurations */
+	0,			/* bReserved */
+};
+
 const uint8_t usb_config_desc[] = {
 	9,			/* bLength */
 	0x02,			/* bDescriptorType */
 	0x27,0x00,		/* wTotalLength */
 	1,			/* bNumInterfaces */
 	1,			/* bConfigurationValue */
-	0,			/* iConfiguration */
+	4,			/* iConfiguration */
 	0x80,			/* bmAttributes */
 	100/2,			/* bMaxPower */
 
@@ -87,7 +99,7 @@ const uint8_t usb_config_desc[] = {
 		0xff,			/* bInterfaceClass */
 		0xff,			/* bInterfaceSubClass */
 		0xff,			/* bInterfaceProtocol */
-		0,			/* iInterface */
+		5,			/* iInterface */
 
 			/* EP1 -> Bulk In */
 			7,			/* bLength */
@@ -147,66 +159,66 @@ const uint8_t usb_string_desc_3[] = {
 	'N',0, 'u',0, 'm',0, 'b',0, 'e',0, 'r',0,
 };
 
-void usb_ep0_send(void *ptr, int len) {
-	do {
-		char cnt = len > 64 ? 64 : len;
+const uint8_t usb_string_desc_4[] = {
+	2+(8+7)*2,	/* bLength */
+	0x03,		/* bDescriptorType */
+	'S',0, 'p',0, 'e',0, 'c',0, 'i',0, 'a',0, 'l',0, ' ',0,
+	'C',0, 'o',0, 'n',0, 'f',0, 'i',0, 'g',0, 's',0,
+};
 
-		/* Wait for the EP0 TX interrupt */
-		while (!(usb_irq0 & 0x02));
-		usb_irq0 = 0x02;	/* clear int */
+const uint8_t usb_string_desc_5[] = {
+	2+(8+10)*2,	/* bLength */
+	0x03,		/* bDescriptorType */
+	'S',0, 'p',0, 'e',0, 'c',0, 'i',0, 'a',0, 'l',0, ' ',0,
+	'I',0, 'n',0, 't',0, 'e',0, 'r',0, 'f',0, 'a',0, 'c',0, 'e',0, 's',0,
+};
 
-		/* Copy the data into the EP0 buffer */
-		for (char i = 0; i < cnt; i++) usb_ep0_buff[i] = ((uint8_t *)ptr)[i];
 
-		/* Send the data */
-		usb_ep0_txlen = cnt;
-		usb_ep0_ctl = 0x01;
-
-		len -= cnt; ptr += cnt;
-	} while (len > 0);
-}
 
 char usb_get_desc(struct usb_setup_pkt *setup) {
 	const uint8_t *desc = 0;
 
 	switch (setup->wValue >> 8) {
-	/* device descriptor */
-	case 0x01:
-		desc = usb_device_desc;
-		break;
+	case 0x01: desc = usb_device_desc; break;
+	case 0x02: desc = usb_config_desc; break;
 
-	/* config descriptor */
-	case 0x02:
-		desc = usb_config_desc;
-		break;
-
-	/* string descriptor */
 	case 0x03:
 		switch (setup->wValue & 0xff) {
-		case 0: /* index 0: Language IDs */
-			desc = usb_string_desc_0;
-			break;
-
-		case 1: /* index 1 */
-			desc = usb_string_desc_1;
-			break;
-
-		case 2: /* index 2 */
-			desc = usb_string_desc_2;
-			break;
-
-		case 3: /* index 3 */
-			desc = usb_string_desc_3;
-			break;
+		case 0: desc = usb_string_desc_0; break;
+		case 1: desc = usb_string_desc_1; break;
+		case 2: desc = usb_string_desc_2; break;
+		case 3: desc = usb_string_desc_3; break;
+		case 4: desc = usb_string_desc_4; break;
+		case 5: desc = usb_string_desc_5; break;
 		}
 		break;
+
+	case 0x06: desc = usb_devqualifier_desc; break;
 	}
 
 	if (desc) {
 		uint16_t len = desc[0];
 		if (desc[1] == 0x02) len = desc[2] | (desc[3] << 8);
 		if (setup->wLength < len) len = setup->wLength;
-		usb_ep0_send(desc, len);
+
+		for (uint16_t i = 0; i < len;) {
+			char n = (len - i) > 64 ? 64 : (len - i);
+
+			/* Wait for the EP0 TX interrupt */
+			while (!(usb_irq0 & 0x02));
+			usb_irq0 = 0x02;	/* clear int */
+
+			/* Fill out the buffer */
+			for (char j = 0; j < n; j++)
+				usb_ep0_buff[j] = desc[i+j];
+
+			/* Send the data */
+			usb_ep0_txlen = n;
+			usb_ep0_ctl = 0x01;
+
+			i += n;
+		}
+
 		return 1;
 	}
 
@@ -441,7 +453,7 @@ void main(void) {
 
 	for (;;) {
 		/* Turn off the LED */
-		P1_1 = 1;
+		//P1_1 = 1;
 
 		if (usb_irq0 & 0x08) {
 			/* Bus reset */
@@ -462,7 +474,8 @@ void main(void) {
 			usb_ep0_ctl = 0x04;
 
 			/* Light up the LED */
-			P1_1 = 0;
+			//P1_1 = 0;
+			P1_1 ^= 1;
 
 			/* Handle the setup packet! */
 			usb_h_setup((void *)setup);
