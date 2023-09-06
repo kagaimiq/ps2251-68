@@ -19,7 +19,7 @@
 
 ## Contents
 
-- [Some info](info/)
+- [Some info](info/index.md)
   - [Pinout](info/pinout.md)
   - [Some texts (needs cleanup)](info/texts/)
 - [Some programs](progs/)
